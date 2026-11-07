@@ -76,7 +76,7 @@ def render_portfolio(student_id, course):
         st.info("No events yet. Complete a practice round or add an investigation above.")
 
     report = {
-        "title":"PairEd — student-controlled learning evidence report",
+        "title":"ClassPair — student-controlled learning evidence report",
         "disclaimer":"Self-reported portfolio and AI-assisted practice evidence; not verified grades or an automated suitability decision.",
         "events":entries,
         "summary":dict(Counter(e["kind"] for e in entries)),

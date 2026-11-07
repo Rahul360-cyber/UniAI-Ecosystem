@@ -1,4 +1,4 @@
-"""New tests: run from the PairEd project root with pytest -q tests."""
+"""New tests: run from the ClassPair project root with pytest -q tests."""
 import sqlite3
 from prompt_engine import PRESET_PROMPTS, build_tutor_context, approximate_tokens
 
@@ -10,14 +10,14 @@ def test_prompt_presets_are_short():
 
 def test_personal_prompt_opt_in_and_delete(tmp_path, monkeypatch):
     import storage
-    monkeypatch.setattr(storage, "DB_PATH", tmp_path / "paired.db")
-    monkeypatch.setenv("DEMO_STUDENT_EMAIL", "student@paired.demo")
+    monkeypatch.setattr(storage, "DB_PATH", tmp_path / "ClassPair.db")
+    monkeypatch.setenv("DEMO_STUDENT_EMAIL", "student@ClassPair.demo")
     monkeypatch.setenv("DEMO_STUDENT_PASSWORD", "StudentDemo2026!")
-    monkeypatch.setenv("DEMO_PROF_EMAIL", "professor@paired.demo")
+    monkeypatch.setenv("DEMO_PROF_EMAIL", "professor@ClassPair.demo")
     monkeypatch.setenv("DEMO_PROF_PASSWORD", "ProfessorDemo2026!")
     storage.init_db()
-    student = storage.verify_credentials("student@paired.demo", "StudentDemo2026!", "Student")
-    prof = storage.verify_credentials("professor@paired.demo", "ProfessorDemo2026!", "Professor")
+    student = storage.verify_credentials("student@ClassPair.demo", "StudentDemo2026!", "Student")
+    prof = storage.verify_credentials("professor@ClassPair.demo", "ProfessorDemo2026!", "Professor")
     uid, prof_id = student["id"], prof["id"]
     course = "Computer Engineering"
     assert not storage.prompt_storage_allowed(uid)
@@ -37,7 +37,7 @@ def test_personal_prompt_opt_in_and_delete(tmp_path, monkeypatch):
 
 def test_context_has_relevant_material_without_identity(tmp_path, monkeypatch):
     import storage
-    monkeypatch.setattr(storage, "DB_PATH", tmp_path / "paired.db")
+    monkeypatch.setattr(storage, "DB_PATH", tmp_path / "ClassPair.db")
     storage.init_db()
     storage.save_material("Computer Engineering", "Pointers", "A linked list uses pointers to connect nodes.\n\nStacks follow LIFO.")
     storage.save_material("Internet of Things (IoT)", "Sensitive", "Never leak IoT sensors to unrelated course!")
@@ -71,11 +71,11 @@ def test_existing_database_migrates(tmp_path, monkeypatch):
 
 def test_delete_all_data_removes_saved_prompts(tmp_path, monkeypatch):
     import storage
-    monkeypatch.setattr(storage, "DB_PATH", tmp_path / "paired.db")
-    monkeypatch.setenv("DEMO_STUDENT_EMAIL", "student@paired.demo")
+    monkeypatch.setattr(storage, "DB_PATH", tmp_path / "ClassPair.db")
+    monkeypatch.setenv("DEMO_STUDENT_EMAIL", "student@ClassPair.demo")
     monkeypatch.setenv("DEMO_STUDENT_PASSWORD", "StudentDemo2026!")
     storage.init_db()
-    uid = storage.verify_credentials("student@paired.demo", "StudentDemo2026!", "Student")["id"]
+    uid = storage.verify_credentials("student@ClassPair.demo", "StudentDemo2026!", "Student")["id"]
     storage.consent_prompt_storage(uid, True)
     storage.save_custom_prompt(uid, "Computer Engineering", "Short", "Explain simply")
     storage.delete_student_data(uid)

@@ -1,6 +1,6 @@
-# PairEd — token-smart student tutor: incremental update
+# ClassPair — token-smart student tutor: incremental update
 
-This package is **not** a replacement for the entire PairEd project. It overlays seven existing/new Python files and one new test file onto the final PairEd hackathon version.
+This package is **not** a replacement for the entire ClassPair project. It overlays seven existing/new Python files and one new test file onto the final ClassPair hackathon version.
 
 ## What changed
 
@@ -8,7 +8,7 @@ This package is **not** a replacement for the entire PairEd project. It overlays
 - `student_workspace.py` **REPLACE**: student AI tutor now offers six presets, personal saved prompts, explicit private prompt-saving consent, optional context, a configurable estimated token budget and model usage metrics.
 - `ai_service.py` **REPLACE**: calls Gemini and reports `usage_metadata` token counts. Caps tutor output at 1,100 tokens (this cap is an API setting; the input token estimate is not a hard provider cap).
 - `app.py` **REPLACE**: builds context for the authenticated student and selected course; reuses identical responses from the same student's current session cache; does not store raw questions in SQLite.
-- `storage.py` **REPLACE**: adds `student_prompts` and one optional consent column to `users`; automatically upgrades an existing PairEd database; allows students to delete one/all saved prompt templates.
+- `storage.py` **REPLACE**: adds `student_prompts` and one optional consent column to `users`; automatically upgrades an existing ClassPair database; allows students to delete one/all saved prompt templates.
 - `portfolio_ui.py` **REPLACE**: makes clear that delete-all removes saved templates too, and clears student-only in-session tutor context on deletion.
 - `tests/test_prompt_optimization.py` **NEW**: tests consent, per-course separation, context trimming, existing database migration and deletion.
 

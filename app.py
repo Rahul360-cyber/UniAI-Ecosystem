@@ -1,4 +1,4 @@
-"""PairEd hackathon demo: two authenticated portals with consent-aware learning workflows.
+"""ClassPair hackathon demo: two authenticated portals with consent-aware learning workflows.
 
 IMPORTANT: Prototype, not certified GDPR or EU AI Act compliance. Real deployments
 require privacy/security review, institutional permission and human examiners.
@@ -19,7 +19,7 @@ from student_workspace import render_student_workspace
 from professor_workspace import render_professor
 from ui_theme import inject_theme, banner
 
-st.set_page_config(page_title='PairEd — Inclusive AI Campus', page_icon='🎓', layout='wide', initial_sidebar_state='expanded')
+st.set_page_config(page_title='ClassPair — Inclusive AI Campus', page_icon='🎓', layout='wide', initial_sidebar_state='expanded')
 
 try:
     init_db()
@@ -28,7 +28,7 @@ except Exception as exc:
     st.stop()
 
 with st.sidebar:
-    st.markdown('## 🎓 PairEd')
+    st.markdown('## 🎓 ClassPair')
     st.caption('Inclusive computer engineering learning')
     st.divider()
     st.markdown('**Accessibility · local session only**')
@@ -105,6 +105,6 @@ else:
     render_professor(course)
 
 st.divider()
-st.caption('PairEd hackathon prototype · Student practice is formative, never an official final grade. '
+st.caption('ClassPair hackathon prototype · Student practice is formative, never an official final grade. '
            'No facial/emotion/attention tracking. No neurodivergence inference or reporting. '
            'University authorization, GDPR assessment and appropriate service contracts are required before real deployment.')

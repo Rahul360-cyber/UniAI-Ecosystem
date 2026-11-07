@@ -50,7 +50,7 @@ LEVELS = [
 
 
 def _gemini_json(prompt: str, api_key: str, model: str = None):
-    """Use the same official Gemini SDK configuration as the rest of PairEd."""
+    """Use the same official Gemini SDK configuration as the rest of ClassPair."""
     from ai_service import generate_json
     return generate_json(prompt)
 

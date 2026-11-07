@@ -1,72 +1,91 @@
-# LectureLoop v3 — Anonymous class feedback + student-controlled longitudinal portfolios
+# ClassPair — Hackathon Demo
 
-A hackathon Streamlit prototype for university learning: student questions and short quizzes inform a professor's **aggregate** class dashboard, while students can separately opt into a **private, persistent pseudonymous evidence portfolio**. Students can voluntarily export their academic/research evidence to professors, prospective PhD supervisors, or industry recruiters. No automated research-aptitude score, candidate ranking, or employment decision is produced.
+ClassPair is a **prototype**, not a university-approved service or a certified GDPR/EU AI Act implementation. The demo uses two **fictional** course templates: Computer Engineering and Internet of Things (IoT). It preserves the provided coding execution tracer and interactive IoT breadboard simulator.
 
-## Run locally (Windows PowerShell)
+## Installation (Windows / PowerShell)
 
-1. Extract this archive into your existing `hackathon ai` working folder. Copy all files, including the **new `portfolio.py`**. Keep your existing `.env` and `.venv` files; **do not copy your `.env` into the GitHub repository.**
-2. From your existing environment:
+Use Python 3.11 or 3.12. **Streamlit is pinned to exactly 1.37.0.**
 
 ```powershell
+cd "C:\Users\rahul\Desktop\hackathon ai"
+.\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
+```
+
+Copy the key/value lines from `.env.example` into your **existing** `.env`. **Do not overwrite your existing Gemini key.** Set the four `DEMO_*` variables and a random `FEEDBACK_HMAC_SECRET`. Passwords must be at least 12 characters. Demo account values in `.env.example`:
+
+| Workspace | Email | Demo password |
+|---|---|---|
+| Student | `student@ClassPair.demo` | `StudentDemo2026!` |
+| Professor | `professor@ClassPair.demo` | `ProfessorDemo2026!` |
+
+**Change these passwords before showing a publicly accessible demonstration.** Accounts are created on the first launch and stored as salted PBKDF2 password hashes in `ClassPair_demo.db`. Changing `.env` passwords later does not overwrite existing accounts; for a clean fictional demo you may stop the app and delete **only** the new `ClassPair_demo.db`, but **preserve** your previous `learning_space.db`, which this package does not modify.
+
+Run:
+
+```powershell
 python -m streamlit run app.py
 ```
 
-Optional Gemini API (requires cloud processing; use fictional content for the demonstration):
+## Student Portal
 
-```powershell
-Copy-Item .env.example .env
-# Edit .env to supply a GEMINI_API_KEY locally; do not share it.
-```
+- Private AI questions, concept maps, evidence-based foundation checks and both original interactive labs
+- **Practice & oral viva**: subject-specific 3-turn adaptive question-and-response simulation (typed), plus written practice; follows professor-configured exam formats/rubrics
+- Professor-approved classroom catch-up: cleaned code, text captions, visual concept map
+- Session-only focus mode, comfortable text, reduced motion, bold terms; preferences are **never stored** or sent to the professor
+- Explicitly opt-in longitudinal learning portfolio, editable research/activity records, student-owned JSON career/research export, permanent deletion
+- Optional per-topic class contribution, one pseudonymous contribution per account/topic; professor sees only sufficiently large aggregates
 
-Without a Gemini key, the interface runs in clearly marked **scripted demo** mode.
+## Professor Portal
 
-## New v3 flow
+- Fictional or opt-in class-level topic analytics with small-group suppression
+- Edit oral format, written format, rubric and syllabus per course
+- Upload/paste authorized `.txt`, `.md`, text-based `.pdf` material, which is stored locally
+- On-demand, multimodal *classroom* ingestion: pasted transcript, audio recording and whiteboard image (Gemini needed for media)
+- Three specialist agents called in parallel: code synchronizer, visual abstractor, catch-up/subtitle summary generator
+- Fourth on-demand edge-case code example agent
+- Professor explicitly approves which outputs are published to students
+- Manual review of a **student-voluntarily-uploaded** JSON portfolio report; no automated PhD/job ranking and no direct private-history access
 
-1. Open **My Learning Portfolio**; accept the local storage notice and click **Create private portfolio**. **Save the recovery key**. It is only shown in your current browser session until you hide it; the application stores its SHA-256 digest, not the key itself.
-2. Go to **Student**, ask a question, and explicitly select **Save topic (not my question text) to my private year-long portfolio**. Separately, you may opt in to class-level aggregates; these choices are independent.
-3. Go to **Practice & Reassessment**, complete a quiz, and select **Save this result in my private long-term portfolio**. This stores topic, score, stage and simple misconception descriptions. The actual answers are not saved. Repeat later in the same class or another class code.
-4. Return to **My Learning Portfolio**. Add a research question, experiment, failed attempt, project, reflection, collaboration or academic milestone, optionally linking a GitHub repository or other public evidence. These entries are **self-reported and unverified**.
-5. Review your chronological record, scores across classes, question topic counts, and research evidence. **Download an HTML report** (print to PDF in your browser), or **download JSON** for a voluntary reviewer demonstration.
-6. Under **Professor**, load a student-provided JSON file (or `docs/fictional_candidate_example.json` for a clearly labeled fictional demo) in **Voluntary PhD / industry candidate evidence review**. The file is displayed only for that session; it is not added to class data. The professor's regular class dashboard does **not** reveal individual student profiles.
-7. Return to My Learning Portfolio to **lock** or **delete** your private data, or use the recovery key to unlock it in a new browser session **on the same server**.
+## What's not implemented
 
-## Original v2 features retained
+**Not** continuous background streaming, automatic speech-to-text live captions, real-time camera capture, advanced embedding/RAG infrastructure, access control suitable for a public university, or official/automated final grading. Oral simulation accepts a typed answer or an uploaded short audio recording (transcribed on demand with consent), rather than a live microphone session. The professor's uploaded class recording can be transcribed on demand. The retrieval library is deliberately small lexical retrieval, not a vector database.
 
-- Student Gemini tutor (with cloud-data acknowledgement or offline scripted fallback)
-- Optional, topic-only anonymous classroom feedback counts; no stored raw question text
-- Fixed, objectively scored practice questions, concept maps, learning interventions, and reassessment
-- Professor aggregate reports and demonstration data (no individual profiling)
-- Classroom Lab: on-demand text/audio/photo processing, code feed, visual nodes, subtitle/catch-up summary, dynamic example generation, and publishing controls
-- Original flowchart images and Mermaid source in `docs/`
+## Privacy and legal limitations
 
-## Privacy, fairness and practical limitations
-
-- **Pseudonymous is not the same as anonymous:** a year-long portfolio must link events to the same account. Possession of the recovery key grants access in this demonstration. Do not use actual students' data until there is identity management, secure authentication, access control, encryption, lifecycle policy, consent governance, privacy/legal review and a stable database.
-- Class-wide anonymous reports and private individual portfolios are **separate**. Students choose independently what to contribute; a reviewer's access requires an **export voluntarily supplied by the student**, not a professor-side search or backdoor.
-- A student's report is **not** a hiring or PhD recommendation. Quiz scores cover tiny repeated practice-question sets, so score changes do not establish verified mastery or research aptitude. Project evidence is student-entered and requires validation. Formal admissions or employer criteria may still apply.
-- The SQLite database is on the **app server**, not automatically on a student's own device. A shared hosting operator has access to the stored records; this is not end-to-end encrypted. Hosting on a transient service may delete the database on redeploy. Do not promise year-long durability without production storage and backups.
-- Gemini is cloud AI; uploaded text/media go to Google. Use mock data until you've determined appropriate consent and data terms.
-- Professor is a demo role only; it has **no authentication**. All role controls and shared boards remain unprotected. Counts of 5+ **reports** are not counts of distinct participants or guaranteed anonymous.
-- Portfolios can be deleted, but aggregate contributions cannot be retroactively removed per user because they were never linked to the private key. Explain this limitation to students.
-- This archive contains **no real API key or real student data**.
+- The app uses role checks but demo authentication and SQLite are **not** production ready.
+- A persistent login means student actions are **pseudonymous**, not completely anonymous to the server operator. Professor dashboard sees no identity or individual conversation.
+- The 5-contributor threshold reduces small-cohort disclosure but does **not** guarantee GDPR anonymization.
+- A learner must explicitly consent before any longitudinal tracking, and can delete data. Accessibility settings are session-only.
+- No neurodivergence labels, cognitive/attention/emotion biometrics or inference. No automatic official grades, candidate suitability scores or hiring recommendations.
+- **Google Gemini is an external cloud processor.** If enabled, the specific messages, course materials or authorized media sent through the API leave the server. A checkbox alone is not enough to establish organizational GDPR compliance. Use invented demonstration data until the institution performs a DPIA, selects a suitable legal basis, meets processor/transfer requirements, and puts appropriate agreements and security in place.
+- No actual Politecnico di Torino logo is shipped. A neutral campus watermark is included. An authorized `assets/polito_logo.png` can be supplied by the developer with appropriate permission; do not imply the university endorses the prototype.
+- Students can voluntarily export a research/career evidence report; the application never sends it to employers, supervisors or partners. Any use in recruitment requires additional governance and human review.
 
 ## Tests
 
 ```powershell
-python -m unittest discover -s tests -v
+python -m pip install pytest
+python -m pytest -q tests
 ```
 
-## Push updates to GitHub
+## GitHub push
+
+Do **not** add `.env`, virtual environments, or `*.db` to Git. After testing your app:
 
 ```powershell
 git status
-# Verify .env, .venv, *.db are not staged
-
-git add app.py portfolio.py requirements.txt README.md .gitignore .env.example docs/ tests/
-git commit -m "Add student-controlled longitudinal portfolio and candidate evidence export"
+git add app.py auth.py ai_service.py assessment.py courses.py professor_workspace.py portfolio_ui.py student_workspace.py teaching_copilot.py storage.py ui_theme.py interactive_labs.py breadboard_lab.py requirements.txt README.md .env.example .gitignore .streamlit/config.toml assets/torino_campus_mark.svg tests/test_core.py
+git diff --cached --stat
+git commit -m "Build ClassPair student and professor portals with adaptive exams"
 git pull --rebase origin main
 git push origin main
 ```
 
-If working on a team, a feature branch and pull request is safer than pushing to shared `main`. **Never force-push shared branches.**
+## Safety / compatibility notes
+
+- Existing `student_workspace(1).py` from the attachment has been included as canonical `student_workspace.py` after merging the full IoT lab tab and Gemini SDK adaptor.
+- `interactive_labs.py` and `breadboard_lab.py` were preserved from the uploaded originals.
+- Your previous database and private portfolio files are left untouched. The new demo uses `ClassPair_demo.db`.
+- A professor can edit a course's content, but users cannot create or elevate their role themselves.
+- This is intentionally a **hackathon MVP**. Have a human professor evaluate outputs and verify every demo example.

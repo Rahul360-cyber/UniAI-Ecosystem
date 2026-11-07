@@ -1,0 +1,54 @@
+LECTURELOOP — UI PATCH ONLY
+==========================
+
+This is NOT a new copy of the whole project. You keep your existing
+portfolio.py, README.md, docs/, tests/, .env, SQLite database, .git/,
+and .venv/ exactly as they are.
+
+INSTRUCTIONS (Windows / VS Code)
+---------------------------------
+1. Back up your current app.py if it contains recent teammate changes.
+2. Open C:\Users\rahul\Desktop\hackathon ai\
+3. Copy the following contents of this patch into that folder:
+   - app.py                    [replace current app.py]
+   - ui_theme.py               [new file]
+   - assets/torino_campus_mark.svg [new background illustration]
+   - .streamlit/config.toml    [new Streamlit theme configuration]
+   - .gitignore                [replace OR merge its added logo-exclusion line]
+4. DO NOT overwrite .env, portfolio.py or a database file.
+5. Run from the project folder:
+
+      python -m streamlit run app.py
+
+   If dependencies are missing:
+      python -m pip install -r requirements.txt
+
+NEW FEATURES
+------------
+- Modern navy/cyan interface with rounded cards and a campus-style watermark
+- Clickable student navigation to practice and learning portfolio
+- Interactive dashboard concept filters and display controls
+- Portfolio timeline event filter
+- Accessibility toggles for reading size and motion
+- Responsive sidebar and polish to existing forms/charts
+
+POLITECNICO DI TORINO LOGO
+-------------------------
+The university states that use of its official logo requires authorization.
+This patch therefore includes an ORIGINAL campus-style background, not the logo.
+If you already have permission to use the official logo, put the authorized PNG
+at assets/polito_logo.png then enable "Show authorized university logo" in
+Customize your view on the sidebar. The logo file is gitignored by default.
+Use of a logo is not an endorsement; this is an unofficial student prototype.
+
+GITHUB (ONLY AFTER LOCAL TEST)
+------------------------------
+      git status
+      git add app.py ui_theme.py .gitignore assets/torino_campus_mark.svg .streamlit/config.toml
+      git diff --cached --stat
+      git commit -m "Improve interactive LectureLoop interface"
+      git pull --rebase origin main
+      git push origin main
+
+Remember: GitHub collaborative branches may have changes not present in this
+patch. Review your local diff before replacing app.py if your teammates edited it.

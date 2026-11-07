@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-11-07T13:31:40+00:00",
+  "covered_period": {
+    "first": "2026-11-07T12:00:00+00:00",
+    "last": "2026-11-07T12:00:00+00:00"
+  },
+  "classes": [
+    "ML101"
+  ],
+  "total_recorded_assessments": 2,
+  "assessment_scores": [
+    {
+      "date": "2026-11-07T12:00:00+00:00",
+      "course": "ML101",
+      "topic": "Backpropagation",
+      "score": 50,
+      "assessment_stage": "Initial assessment",
+      "practice_misconceptions": "Chain rule"
+    },
+    {
+      "date": "2026-11-07T12:00:00+00:00",
+      "course": "ML101",
+      "topic": "Backpropagation",
+      "score": 100,
+      "assessment_stage": "Reassessment",
+      "practice_misconceptions": ""
+    }
+  ],
+  "per_concept_practice_progress": [
+    {
+      "course": "ML101",
+      "topic": "Backpropagation",
+      "attempts": 2,
+      "first_score": 50,
+      "latest_score": 100,
+      "change_points": 50
+    }
+  ],
+  "recorded_question_topics": {
+    "Backpropagation": 1
+  },
+  "research_and_learning_evidence_counts": {
+    "Research question": 1,
+    "Experiment": 1,
+    "Iteration / failed attempt": 1
+  },
+  "evidence_entries": [
+    {
+      "date": "2026-11-07T12:00:00+00:00",
+      "course": "ML101",
+      "kind": "Research question",
+      "title": "Can an adaptive explanation reduce confusion?",
+      "description": "Proposed an evaluation question and outlined an experiment using anonymized feedback.",
+      "evidence_url": ""
+    },
+    {
+      "date": "2026-11-07T12:00:00+00:00",
+      "course": "ML101",
+      "kind": "Experiment",
+      "title": "Compare two feedback approaches",
+      "description": "Designed two demonstration exercises and recorded what outcomes should be measured.",
+      "evidence_url": ""
+    },
+    {
+      "date": "2026-11-07T12:00:00+00:00",
+      "course": "ML101",
+      "kind": "Iteration / failed attempt",
+      "title": "Revise explanation after a failed trial",
+      "description": "Reflected on why an example did not improve understanding and changed the prompt design.",
+      "evidence_url": ""
+    }
+  ],
+  "scope": "Student-selected local portfolio records, not a complete academic transcript.",
+  "verification": "Student-entered evidence is self-reported; short practice quizzes are not official grades.",
+  "decision_notice": "For human review only; not an automated employment, admission, ranking, or PhD suitability decision.",
+  "demo_note": "FICTIONAL HACKATHON EXAMPLE, not a real student record."
+}

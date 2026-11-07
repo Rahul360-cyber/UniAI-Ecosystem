@@ -3,17 +3,16 @@
 .env.*
 !.env.example
 .streamlit/secrets.toml
-
-# Python
+# Local environment
 .venv/
 venv/
 __pycache__/
 *.pyc
-
-# Local databases and files
+# Local student-related storage
 *.db
+*.sqlite
 *.sqlite3
-*.log
-
-# IDE
+# IDE files
 .vscode/
+# Authorized institution logos are local-only unless redistribution is approved
+assets/polito_logo.png

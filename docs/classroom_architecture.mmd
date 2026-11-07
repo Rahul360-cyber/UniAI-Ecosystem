@@ -1,0 +1,33 @@
+graph TD
+    %% Input Layer (Multimodal & Course Context)
+    subgraph Input_Layer ["1. Classroom Ingestion & Context"]
+        A1[Professor Spoken Audio & Whiteboard] --> A2[Multimodal Stream Processor]
+        A3[Course Syllabus & Past Notes] --> A4[Context-Aware RAG Engine]
+    end
+
+    %% Multi-Agent Execution Layer
+    subgraph Agent_Layer ["2. Background Multi-Agent Processing Engine"]
+        A4 --> B1[Agent 1: Code & Logic Synchronizer]
+        A2 --> B2[Agent 2: Visual-Spatial Abstractor]
+        A2 --> B3[Agent 3: Real-Time Subtitle & Catch-Up Generator]
+        
+        %% Mid-Class Dynamic Interaction
+        Q[Student / Professor Mid-Class Question] -->|Triggers| B4[Agent 4: Dynamic Edge-Case Code Generator]
+    end
+
+    %% Output & Presentation Layer
+    subgraph Output_Layer ["3. Neuroinclusive Presentation & Control"]
+        B1 --> C1[Clean Code Sync Feed]
+        B2 --> C2[Simple Visual Diagrams / Pointers]
+        B3 --> C3[Live Subtitles & Summary Log]
+        B4 --> C1
+        
+        %% User Interfaces
+        C1 & C2 & C3 --> D1[Professor Control Dashboard: Select Board Projections]
+        C1 & C2 & C3 --> D2[Student Personalized UI: Bolding, Pacing & Visual Toggles]
+    end
+
+    %% Styling / Flow
+    style Input_Layer fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style Agent_Layer fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style Output_Layer fill:#fff3e0,stroke:#e65100,stroke-width:2px

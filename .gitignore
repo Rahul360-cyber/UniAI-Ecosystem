@@ -1,0 +1,19 @@
+# Secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Local databases and files
+*.db
+*.sqlite3
+*.log
+
+# IDE
+.vscode/
